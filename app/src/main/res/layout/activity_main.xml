@@ -28,13 +28,11 @@
             <RadioButton android:id="@+id/radio_male"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="male"
-                android:onClick="onRadioButtonClicked"/>
+                android:text="male" />
             <RadioButton android:id="@+id/radio_female"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="female"
-                android:onClick="onRadioButtonClicked"/>
+                android:text="female" />
         </RadioGroup>
     </LinearLayout>
 
@@ -115,12 +113,15 @@
     <TextView android:id="@+id/resultsTV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="10dp"
+        android:textAlignment="center"
+        android:padding="5dp"
         style="@android:style/TextAppearance.Material.Headline"/>
 
-    <TextView android:id="@+id/healthyTV"
+    <TextView android:id="@+id/hintTV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="10dp"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        android:padding="5dp"
         style="@android:style/TextAppearance.Material.Headline"/>
 </LinearLayout>

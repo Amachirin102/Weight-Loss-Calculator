@@ -2,8 +2,6 @@ package com.amachirin102.weight_loss_calculator
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
-import android.widget.RadioButton
 import com.amachirin102.weight_loss_calculator.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity()
@@ -54,45 +52,25 @@ class MainActivity : AppCompatActivity()
     private fun calculateBMR()
     {
         val feet = binding.feetPicker.value
-        val doubleFeet = feet.toDouble()
-
         val inches = binding.inchPicker.value
-        val doubleInches = inches.toDouble()
+        val pounds = binding.weightPicker.value
+        val age = binding.agePicker.value
+        val genderId = binding.radioGender.checkedRadioButtonId
+        val gender = resources.getResourceEntryName(genderId)
+        val kilograms = pounds * 0.45359237
+        val cm = (((feet*12) + inches) * 2.54)
 
-        val weight = binding.weightPicker.value
+        if(gender == "radio_male") {
+            val bmr = (10 * kilograms) + (6.25 * cm) - (5 * age) + 5
+            binding.resultsTV.text = String.format("Your Basal Metabolic Rate is:" +
+                    " %.2f kcal/day", bmr)
+            binding.hintTV.text = String.format("Men's average BMR tends to be around 1600 - 1800")
 
-        val bmr = weight.toDouble() / ((doubleFeet + doubleInches) * (doubleFeet + doubleInches))
-
-        binding.resultsTV.text = String.format("Your BMR is: %.2f", bmr)
-        binding.healthyTV.text = String.format("Considered: %s", healthyMessage(bmr))
-    }
-
-    private fun healthyMessage(bmr: Double): String
-    {
-        if(bmr < 18.5)
-            return "Underweight"
-        if(bmr < 25.0)
-            return "Healthy"
-        if(bmr < 30.0)
-            return "Overweight"
-
-        return "Obese"
-    }
-
-    fun onRadioButtonClicked(view: View) {
-        if (view is RadioButton) {
-            val checked = view.isChecked
-
-            when (view.getId()) {
-                R.id.radio_male ->
-                    if (checked) {
-
-                    }
-                R.id.radio_female ->
-                    if (checked) {
-
-                    }
-            }
+        }else{
+            val bmr = (10 * kilograms) + (6.25 * cm) - (5 * age) - 161
+            binding.resultsTV.text = String.format("Your Basal Metabolic Rate is:" +
+                    " %.2f kcal/day", bmr)
+            binding.hintTV.text = String.format("Women's average BMR tends to be around 1550")
         }
     }
 }
